@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequence Recall Task</title>
+    <style>
+        body {
+            font-family: cursive;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url(images/pexels-moose-photos-1037992.jpg);
+            background-size: cover;
+        }
+
+        .animate {
+            animation: fadeInUp 2s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes moveLeftToRight {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        #welcome-text {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #forward-span-text {
+            display: none;
+            margin-bottom: 20px;
+
+            font-size: 2em;
+            /* Adjust font size */
+            margin-bottom: 20px;
+            font-weight: bold;
+            /* Make the text bold */
+            color: #333;
+            /* Set a dark color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: rgb(15, 14, 30);
+        }
+
+        #sequence-container {
+            font-size: 500%;
+            /* Increase font size by 50% */
+            margin-bottom: 20px;
+            white-space: nowrap;
+        }
+
+        #user-input {
+            font-size: 18px;
+            /* Increase font size for the input box */
+            padding: 10px;
+            /* Increase padding for the input box */
+            margin-top: 10px;
+            width: 200px;
+            /* Set a fixed width for the input box */
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        #start-task-btn {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            background: linear-gradient(to right, #333, #111);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        #start-task-btn:hover {
+            background: linear-gradient(to right, #111, #333);
+            transform: scale(1.05);
+        }
+
+        #check-btn {
+            font-size: 20px;
+            /* Increase font size for the check button */
+            padding: 15px 30px;
+            /* Increase padding for the check button */
+            margin-top: 10px;
+            cursor: pointer;
+            background: linear-gradient(to right, #333, #111);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        #check-btn:hover {
+            background: linear-gradient(to right, #111, #333);
+            transform: scale(1.05);
+        }
+
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #marks {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        #correct-digits {
+            margin-top: 10px;
+            font-size: 18px;
+            color: green;
+        }
+
+        #incorrect-digits {
+            margin-top: 10px;
+            font-size: 18px;
+            color: red;
+        }
+
+        #user-input-container {
+            display: none;
+        }
+
+        #user-input {
+            font-size: 18px;
+            padding: 15px;
+            /* Increased padding for a more prominent appearance */
+            margin-top: 10px;
+            width: 200px;
+            animation: fadeIn 2s ease-in-out;
+            border: 2px solid #333;
+            /* Add a border for better visibility */
+            border-radius: 8px;
+            /* Rounded corners */
+            outline: none;
+            /* Remove default input outline */
+            transition: box-shadow 0.3s ease;
+            /* Smooth transition for box-shadow */
+        }
+
+        #user-input:focus {
+            /* Box shadow when input is focused */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-color: #007bff;
+        }
+
+        label[for="user-input"] {
+            font-size: 2em;
+            /* Increase font size for the label */
+            margin-bottom: 10px;
+            /* Adjust margin for spacing */
+            display: block;
+            /* Ensure the label is displayed as a block */
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .animated-button {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .moving-span {
+            display: inline-block;
+            animation: moveLeftToRight 5s linear infinite;
+        }
+        .next-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #5B42F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .next-button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .next-button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+        .next-button:hover span {
+            padding-right: 25px;
+          }
+          
+          .next-button:hover span:after {
+            opacity: 1;
+            right: 0;
+          }
+
+        .next-button:hover {
+            background-color: #4a34cc;
+        }
+        
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="welcome-text" class="animate">Hey Champ! Welcome to <b>Digit span</b> test <br> <b><u>Task:-</u></b> You
+        will be given with a number. You have to write the number in reverse order. <br><br>Click on start button to
+        start the test.</div>
+    <div id="forward-span-text" class="animate">Here's the number</div>
+    <div id="sequence-container" class="animation-container"></div>
+    <div id="user-input-container" class="animate">
+        <label for="user-input">Enter the sequence backward:</label>
+        <input type="text" id="user-input" placeholder="Enter here">
+        <button id="check-btn" onclick="checkSequence()" class="animated-button">Check</button>
+    </div>
+    <button id="start-task-btn" onclick="startTask()">Start Task</button>
+    <div id="result"></div>
+    <div id="marks"></div>
+    <div id="correct-digits"></div>
+    <div id="incorrect-digits"></div>
+    <!-- ... Your existing HTML content ... -->
+
+    <div id="retake-btn-container" style="display: none;">
+
+    </div>
+    <a class="next-button" href="/comprehension/index.html" role="button"><span class="text">Next Test&rarr;</span></a>
+
+    <script>
+
+        var sequence;
+
+        function startTask() {
+            // Hide the welcome text
+            document.getElementById('welcome-text').style.display = 'none';
+
+            // Display the forward span for the first ten seconds
+            sequence = generateRandomSequence();
+            document.getElementById('forward-span-text').style.display = 'block';
+            animateForwardSpan(sequence);
+
+            // Hide the start button
+            document.getElementById('start-task-btn').style.display = 'none';
+
+            // Show the user input container after ten seconds
+            setTimeout(function () {
+                // Hide the forward span text
+                document.getElementById('forward-span-text').style.display = 'none';
+                // Hide the forward span
+                document.getElementById('sequence-container').style.display = 'none';
+                // Show the user input container
+                document.getElementById('user-input-container').style.display = 'block';
+            }, 10000);
+        }
+
+        function generateRandomSequence() {
+            return Array.from({ length: 5 }, () => {
+                let randomNumber = Math.floor(Math.random() * 8) + 2; // Numbers from 2 to 9 excluding 1
+                return randomNumber;
+            });
+        }
+
+
+
+        function getRandomColor() {
+            var excludedColors = ['#0000FF', '#FF00FF']; // Blue and Pink
+            var minDarkness = 128; // Adjust this value to control the darkness level
+
+            var randomColor = function () {
+                return Math.floor(Math.random() * 256);
+            };
+
+            var color;
+            do {
+                color = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
+            } while (excludedColors.includes(color) || colorBrightness(color) < minDarkness);
+
+            return color;
+        }
+
+
+
+        function colorBrightness(color) {
+            // Calculate the brightness of a color using a formula
+            // brightness = (299*R + 587*G + 114*B) / 1000
+            var match = color.match(/(\d+), (\d+), (\d+)/);
+            if (match) {
+                var brightness = (299 * parseInt(match[1]) + 587 * parseInt(match[2]) + 114 * parseInt(match[3])) / 1000;
+                return brightness;
+            }
+            return 0;
+        }
+        function animateForwardSpan(numbers) {
+            var container = document.getElementById('sequence-container');
+            container.innerText = ''; // Clear previous content
+
+            for (var i = 0; i < numbers.length; i++) {
+                var span = document.createElement('span');
+                span.innerText = numbers[i];
+                span.className = 'moving-span';
+                span.style.color = getRandomDarkColor();
+                span.style.marginRight = '5px';
+                span.style.textShadow = '0 0 20px rgba(0, 0, 255, 0.8)';
+                container.appendChild(span);
+            }
+        }
+        function animateForwardSpan(numbers) {
+            var container = document.getElementById('sequence-container');
+            container.innerText = ''; // Clear previous content
+
+            for (var i = 0; i < numbers.length; i++) {
+                var span = document.createElement('span');
+                span.innerText = numbers[i];
+                span.className = 'moving-span';
+                span.style.color = getRandomColor();
+                span.style.marginRight = '10px';
+                span.style.boxShadow = '0 0 10px rgba(0, 0, 255, 0.8)'; // Sky Blue color
+                container.appendChild(span);
+            }
+        }
+        function checkSequence() {
+            var userInput = document.getElementById('user-input').value;
+            var reversedSequence = sequence.slice().reverse().map(String);
+
+            var correctCount = 0;
+            var incorrectCount = 0;
+
+            for (var i = 0; i < reversedSequence.length; i++) {
+                if (userInput[i] === reversedSequence[i]) {
+                    correctCount++;
+                } else {
+                    incorrectCount++;
+                }
+            }
+
+            // Display the result in the appropriate elements
+            var resultText = document.getElementById('result');
+            var marksText = document.getElementById('marks');
+            var correctDigitsText = document.getElementById('correct-digits');
+            var incorrectDigitsText = document.getElementById('incorrect-digits');
+
+            resultText.innerHTML = 'Result: ';
+            marksText.innerHTML = 'Marks: ';
+            correctDigitsText.innerHTML = 'Correct Digits: ';
+            incorrectDigitsText.innerHTML = 'Incorrect Digits: ';
+
+            if (correctCount === reversedSequence.length) {
+                resultText.innerHTML += 'Correct! Well done.';
+                document.getElementById('retake-btn-container').style.display = 'block';
+            } else {
+                resultText.innerHTML += 'Incorrect. Please try again.';
+                document.getElementById('retake-btn-container').style.display = 'block';
+            }
+
+            marksText.innerHTML += correctCount + ' out of ' + reversedSequence.length;
+            correctDigitsText.innerHTML += 'Correct: ' + correctCount;
+            incorrectDigitsText.innerHTML += 'Incorrect: ' + incorrectCount;
+
+            const prevScoredMarks = sessionStorage.getItem('scoredMarks') || 0;
+            const prevTotalMarks = sessionStorage.getItem('totalMarks') || 0;
+            sessionStorage.setItem('totalMarks', parseInt(reversedSequence.length) + parseInt(prevTotalMarks) );
+            sessionStorage.setItem('scoredMarks', parseInt(correctCount) + parseInt(prevScoredMarks));
+        }
+    </script>
+</body>
+
+</html>

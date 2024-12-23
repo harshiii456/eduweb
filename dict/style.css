@@ -1,0 +1,209 @@
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    border: 1px solid black;
+    width: 40rem;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    width: 100vw;
+
+}
+.container h1{
+    text-align: center;
+    color: #0056b3;
+    margin-bottom: 2rem
+}
+input[type='text'] {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+}
+
+/* Add a hover effect */
+input[type='text']:hover {
+    border-color: #aaa;
+}
+
+/* Add a focus effect */
+input[type='text']:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Add a hover effect */
+input[type='text']:hover {
+    border-color: #aaa;
+}
+
+/* Add a focus effect */
+input[type='text']:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    width: 100vw;
+    animation: fadeIn 1s ease-in-out; /* Fade in animation */
+}
+
+.container h1 {
+    text-align: center;
+    color: #0056b3;
+    margin-bottom: 2rem;
+}
+
+input[type='text'] {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease, transform 0.3s ease; /* Add transition for border color and transform */
+    cursor: pointer;
+    animation: fadeIn 1s ease-in-out; /* Fade in animation */
+}
+
+/* Add hover and focus effects */
+input[type='text']:hover {
+    border-color: #aaa;
+}
+
+input[type='text']:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    transform: scale(1.05); /* Scale effect on focus */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out; /* Fade in animation */
+    /* position: absolute; */
+    margin-left: 10rem;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+h3{
+    color: #007bff;
+    margin: 2rem;
+    font-weight: bold;
+}
+#result{
+    font-size: 2rem;
+    margin-top: 2rem;
+    color: #0056b3;
+}
+.back-button{
+    font-size: 1em;
+    margin-top: 1.5em;
+    background-color: #0a69ed;
+    color: #ffffff;
+    padding: 0.7em 1.8em;
+    border-radius: 0.3em;
+    float: right;
+}
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #5B42F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1;
+  }
+  
+  .back-button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .back-button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  .back-button:hover span {
+    padding-right: 25px;
+  }
+  
+  .back-button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  .back-button:hover {
+    background-color: #4a34cc;
+  }
